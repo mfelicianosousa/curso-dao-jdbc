@@ -101,8 +101,28 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		
+		String cmdDelete = "DELETE FROM "
+				.concat("seller ")
+				.concat("WHERE ") 
+				.concat("Id = ? ");
 
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement( cmdDelete );
+            st.setInt(1, id );
+            
+            int rows = st.executeUpdate();
+            if (rows == 0) {
+            	throw new DbException("Registro não encontrado! id = "+id);
+            }
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
