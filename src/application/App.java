@@ -36,8 +36,17 @@ public class App {
 	
 	    
 	    System.out.println("\n=== Test4: seller insert ====");
-	    Seller newSeller = new Seller(0, "Greg", "greg@gmail.com", new Date(), 4000.0, department );
+	    Seller newSeller = new Seller(0, "Frida", "frida@gmail.com", new Date(), 3500.0, department );
 	    sellerDao.insert(newSeller);
 	    System.out.println("Inserted! New id = "+newSeller.getId());
+	    
+	    
+	    System.out.println("\n=== Test5: seller update ====");
+	    // old name Bob Brown
+	    seller = sellerDao.findById(1);
+	    seller.setName("Marta Waine");
+	    
+	    sellerDao.update(seller) ;
+	    System.out.println("Update completed! ");
 	}
 }
